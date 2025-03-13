@@ -1,0 +1,165 @@
+Project Setup Guide: Cat vs. Dog Classifier
+
+This project classifies images of cats and dogs using a Convolutional Neural Network (CNN) model built with TensorFlow and Keras. The project includes training the model and using it to predict whether an image contains a cat or a dog.
+
+Project Structure
+cat_dog_classifier/
+│
+├── data/
+│   ├── train/              # Training images directory
+│   │   ├── cat/            # Cat images
+│   │   └── dog/            # Dog images
+│   ├── validation/         # Validation images directory
+│   └── sampleSubmission.csv
+│
+├── example_imgs/           # Example images for testing predictions
+├── model/                  # Folder to save the trained model
+│   └── model.h5            # Trained model
+│
+├── predict.py              # Script for making predictions
+├── requirements.txt        # Project dependencies
+└── train.py                # Script for training the model
+
+
+Install the required dependencies:
+Use requirements.txt to install all necessary dependencies.
+pip install -r requirements.txt
+
+
+Prepare your data:
+	•	Place your training and validation images in the appropriate folders:
+	•	data/train/cat/ for cat images
+	•	data/train/dog/ for dog images
+	•	data/validation/cat/ for cat validation images
+	•	data/validation/dog/ for dog validation images
+	•	You can use your own dataset or download one, such as from Kaggle.
+
+Training the Model:
+To train the model, run the train.py script. This will use the images in the data/train directory to train
+the CNN model and save the model in the model/ directory as model.h5.
+
+During training, the model will learn to differentiate between cat and dog images.
+Once training is complete, the model will be saved as model/model.h5.
+
+Making Predictions:
+After the model is trained, you can use the predict.py script to make predictions on new images.
+	•	Place your test image in the example_imgs/ folder.
+	•	Run the script and provide the image name (without the .jpg extension) when prompted
+
+The script will load the trained model and predict whether the image contains a cat or a dog.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+_____ Gereon - Generierter Inhalt:
+
+Wissenschaftliche Dokumentation und Praktische Anleitung: Cat vs. Dog Classifier Workflow
+
+1️⃣ Einleitung: Überblick über das Konzept & Zielsetzung
+
+Das Projekt „Cat vs. Dog Classifier“ ist eine Anwendung des maschinellen Lernens, die mithilfe eines Convolutional Neural Networks (CNN) Bilder von Katzen und Hunden klassifiziert. Ziel dieses Projekts war es, ein robustes Modell zu entwickeln, das die Fähigkeit besitzt, zwischen zwei Klassen (Katze oder Hund) zu unterscheiden, basierend auf Bilddaten, die aus einem öffentlichen Datensatz stammen. Die Vorgehensweise umfasst die Datenaufbereitung, das Training des Modells sowie die Vorhersage neuer Bilder.
+
+Diese wissenschaftliche Dokumentation beschreibt den gesamten Entwicklungsprozess, von der Erstellung des Modells über die Implementierung von Trainings- und Vorhersageskripten bis hin zur Automatisierung der Dokumentenerstellung im Projekt.
+
+⸻
+
+2️⃣ Methodik: Beschreibung der eingesetzten Tools & Technologien
+
+Für die Entwicklung des Cat vs. Dog Classifiers wurden folgende Tools und Technologien eingesetzt:
+	1.	TensorFlow und Keras: Diese Bibliotheken wurden verwendet, um das Convolutional Neural Network (CNN) zu erstellen, zu trainieren und zu evaluieren.
+	2.	OpenCV: Diese Bibliothek wurde genutzt, um Bilder zu laden, zu verarbeiten und vor der Vorhersage zu transformieren.
+	3.	Python: Als Programmiersprache, um das Modell zu implementieren, zu trainieren und Vorhersagen zu treffen.
+	4.	Git und GitHub: Zum Versionieren des Codes und zur Speicherung der Trainingsmodelle.
+	5.	Terminal (macOS/Linux): Für die Ausführung der Befehle zur Dateierstellung und für Git-Operationen.
+
+Die Systemumgebung basiert auf Python 3.x und den oben genannten Bibliotheken. Die für das Modell benötigten Bilddaten wurden entweder selbst gesammelt oder aus einem öffentlich zugänglichen Datensatz bezogen.
+
+⸻
+
+3️⃣ Technische Umsetzung: Schritt-für-Schritt-Anleitung der Umsetzung
+
+3.1 Projektstruktur
+
+Das Projekt wurde mit der folgenden Ordnerstruktur aufgebaut:
+
+cat_dog_classifier/
+│
+├── data/
+│   ├── train/              # Training images directory
+│   │   ├── cat/            # Cat images
+│   │   └── dog/            # Dog images
+│   ├── validation/         # Validation images directory
+│   └── sampleSubmission.csv
+│
+├── example_imgs/           # Example images for testing predictions
+├── model/                  # Folder to save the trained model
+│   └── model.h5            # Trained model
+│
+├── predict.py              # Script for making predictions
+├── requirements.txt        # Project dependencies
+└── train.py                # Script for training the model
+
+3.2 Vorbereitung der Daten
+
+Die Bilder wurden in zwei Hauptordner unterteilt:
+	•	train/cat/: Enthält Bilder von Katzen.
+	•	train/dog/: Enthält Bilder von Hunden.
+	•	validation/cat/ und validation/dog/: Enthält validierte Bilder der jeweiligen Klassen.
+
+3.3 Training des Modells
+
+Im train.py-Skript wird ein CNN-Modell mit Keras erstellt und trainiert. Das Modell verwendet eine einfache Architektur aus Convolutional- und MaxPooling-Schichten. Zur Verbesserung der Trainingsrobustheit werden Datenaugmentationstechniken wie horizontales Spiegeln, Rotation und Zoom eingesetzt.
+
+train_generator = train_datagen.flow_from_directory(
+    train_dir,
+    target_size=(IMG_HEIGHT, IMG_WIDTH),
+    batch_size=BATCH_SIZE,
+    class_mode='binary'
+)
+
+Das Training des Modells erfolgt dann durch die model.fit() Methode, welche das Modell mit den Trainingsdaten trainiert und die Validierungsdaten zur Überprüfung des Modells nutzt.
+
+3.4 Vorhersagen mit dem Modell
+
+Im predict.py-Skript wird das trainierte Modell geladen und für Vorhersagen auf neuen Bildern verwendet. Der Code lädt das Bild, bereitet es vor und führt eine Vorhersage durch, ob es sich um eine Katze oder einen Hund handelt.
+model = tf.keras.models.load_model('model/model.h5')
+
+def predict(image_path):
+    processed_img = preprocess_image(image_path)
+    prediction = model.predict(processed_img)[0][0]  # Get prediction score
+    return "Dog 🐶" if prediction > 0.5 else "Cat 🐱"
+
+3.5 Automatisierung der Dokumentenerstellung
+
+Ein wichtiges Ziel des Projekts war es, eine vollständige Dokumentation des Workflows zu erstellen, die automatisch generiert und im Git-Repository gespeichert wird. Dies wurde durch das Erstellen einer Markdown-Datei im Terminal und das Hinzufügen zum Git-Repository erreicht.
+
+⸻
+
+4️⃣ Ergebnisse: Zusammenfassung, inkl. funktionierender Automatisierung
+
+Das Modell zeigt eine hohe Genauigkeit bei der Klassifikation von Bildern als „Katze“ oder „Hund“. Die Verwendung von ImageDataGenerator für Datenaugmentation half, das Modell robuster gegenüber Variationen in den Eingabebildern zu machen. Das Modell wurde in der Datei model/model.h5 gespeichert, und das Vorhersageskript (predict.py) funktioniert fehlerfrei, um neue Bilder zu klassifizieren.
+
+Die Automatisierung der Dokumentenerstellung wurde erfolgreich implementiert. Das Terminal ermöglicht es nun, die wissenschaftliche Dokumentation als paper.md zu generieren und automatisch ins Git-Repository zu committen.
+
+⸻
+
+5️⃣ Fazit & Weiterentwicklung
+
+Die entwickelte Anwendung ist robust und funktional. Die Genauigkeit des Modells kann durch erweiterte Datensätze, tiefere Netzwerke oder Transfer Learning weiter gesteigert werden. Zukünftige Entwicklungen könnten die Integration von weiteren Klassifikationen oder die Verwendung von Echtzeit-Überwachungsfunktionen umfassen.
+
+⸻
+
+Praktische Anleitung zur Erstellung der Markdown-Datei und Git-Operationen
+
+Um die wissenschaftliche Dokumentation als Markdown-Datei zu erstellen und ins Git-Repository zu integrieren, führen Sie die folgenden Befehle im Terminal aus:
