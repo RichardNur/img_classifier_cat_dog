@@ -73,8 +73,8 @@ history = model.fit(
 )
 
 # Save the trained model
-if not os.path.exists('model'):
-    os.makedirs('model')
+if not os.path.exists('../model'):
+    os.makedirs('../model')
 
 model.save('model/model.h5')
 
