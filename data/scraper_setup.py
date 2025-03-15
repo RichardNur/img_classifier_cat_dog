@@ -2,14 +2,17 @@ from scrape_subreddit_avatars import RedditUserImageScraper
 
 
 def run_scraper():
+    """
+    Run the Reddit User Avatar Scraper
+    """
     print("Reddit User Avatar Scraper")
     print("-" * 25)
 
-    # Get user input
-    subreddit = input("Enter subreddit name (without r/): ")
-    folder_name = input("Enter folder name for saving the train images: ")
 
-    # Create and run scraper
+    subreddit = input("Enter subreddit name (without r/): ")
+    folder_name = input("Enter folder name for saving the training images: ")
+
+
     scraper = RedditUserImageScraper(subreddit, folder_name)
     scraper.scrape()
 
