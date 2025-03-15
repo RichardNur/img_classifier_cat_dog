@@ -152,3 +152,4 @@ class RedditUserImageScraper:
             self.process_user(user)
 
         print(f"\n✅ Completed! Downloaded {self.images_downloaded} images to '{self.save_dir}'")
+
